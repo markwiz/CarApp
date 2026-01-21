@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Car.Core.Domain;
+﻿namespace Car.Core.Domain;
 
 public sealed class Car
 {

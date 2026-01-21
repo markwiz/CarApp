@@ -14,3 +14,4 @@ public interface ICarService
     Task<CarDto?> GetAsync(Guid id);
     Task<List<CarDto>> GetAllAsync();
 }
+
