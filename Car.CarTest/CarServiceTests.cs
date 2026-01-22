@@ -74,4 +74,29 @@ public sealed class CarServiceTests
         Assert.Equal(52000, updated.MileageKm);
         Assert.True(updated.ModifiedAt > beforeUpdate!.ModifiedAt);
     }
+    [Fact]
+    public async Task DeleteAsync_RemovesCar()
+    {
+        var dbName = Guid.NewGuid().ToString();
+        await using var context = TestDbFactory.CreateContext(dbName);
+        var service = new CarService(context);
+
+        var created = await service.AddAsync(new CarCreateUpdateDto
+        {
+            Make = "BMW",
+            Model = "320i",
+            Year = 2018,
+            Vin = "BMW12345678901234",
+            MileageKm = 88000
+        });
+
+        var deleted = await service.DeleteAsync(created.Id);
+
+        var after = await service.GetAsync(created.Id);
+
+        Assert.True(deleted);
+        Assert.Null(after);
+    }
+
+
 
