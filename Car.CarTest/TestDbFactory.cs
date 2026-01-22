@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Car.Data;
+using Microsoft.EntityFrameworkCore;
 
-namespace Car.CarTest
+namespace Car.CarTest;
+
+public static class TestDbFactory
 {
-    internal class TestDbFactory
+    public static CarContext CreateContext(string databaseName)
     {
+        var options = new DbContextOptionsBuilder<CarContext>()
+            .UseInMemoryDatabase(databaseName)
+            .Options;
+
+        return new CarContext(options);
     }
 }
