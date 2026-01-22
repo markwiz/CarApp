@@ -20,6 +20,11 @@ public sealed class CarService : ICarService
         Validate(dto);
 
         var now = DateTimeOffset.UtcNow;
+        var vin = dto.Vin.Trim();
+
+        var vinExists = await _context.Cars.AnyAsync(x => x.Vin == vin);
+        if (vinExists)
+            throw new ValidationException("Vin already exists");
 
         var car = new Car.Core.Domain.Car
         {
@@ -46,6 +51,12 @@ public sealed class CarService : ICarService
         var car = await _context.Cars.FirstOrDefaultAsync(x => x.Id == id);
         if (car == null)
             throw new ValidationException("Car not found");
+        var vin = dto.Vin.Trim();
+
+        var vinExists = await _context.Cars.AnyAsync(x => x.Vin == vin && x.Id != id);
+        if (vinExists)
+            throw new ValidationException("Vin already exists");
+
 
         car.Make = dto.Make.Trim();
         car.Model = dto.Model.Trim();
