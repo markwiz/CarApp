@@ -1,5 +1,35 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Car.Core.Dto.CarDto
+
 @{
+    ViewData["Title"] = "Car Details";
 }
+
+<h1>Car Details</h1>
+
+<dl class="row">
+    <dt class="col-sm-2">Make</dt>
+    <dd class="col-sm-10">@Model.Make</dd>
+
+    <dt class="col-sm-2">Model</dt>
+    <dd class="col-sm-10">@Model.Model</dd>
+
+    <dt class="col-sm-2">Year</dt>
+    <dd class="col-sm-10">@Model.Year</dd>
+
+    <dt class="col-sm-2">Vin</dt>
+    <dd class="col-sm-10">@Model.Vin</dd>
+
+    <dt class="col-sm-2">MileageKm</dt>
+    <dd class="col-sm-10">@Model.MileageKm</dd>
+
+    <dt class="col-sm-2">CreatedAt</dt>
+    <dd class="col-sm-10">@Model.CreatedAt</dd>
+
+    <dt class="col-sm-2">ModifiedAt</dt>
+    <dd class="col-sm-10">@Model.ModifiedAt</dd>
+</dl>
+
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</p>

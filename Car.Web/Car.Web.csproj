@@ -16,4 +16,8 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="NewFolder\" />
+	</ItemGroup>
+
 </Project>

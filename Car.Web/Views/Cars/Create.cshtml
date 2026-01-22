@@ -1,5 +1,39 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Car.Core.Dto.CarCreateUpdateDto
+
 @{
+    ViewData["Title"] = "Create Car";
 }
+
+<h1>Create Car</h1>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label class="form-label">Make</label>
+        <input class="form-control" asp-for="Make" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Model</label>
+        <input class="form-control" asp-for="Model" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Year</label>
+        <input class="form-control" asp-for="Year" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Vin</label>
+        <input class="form-control" asp-for="Vin" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">MileageKm</label>
+        <input class="form-control" asp-for="MileageKm" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
