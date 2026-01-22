@@ -1,0 +1,41 @@
+﻿@model Car.Core.Dto.CarCreateUpdateDto
+
+@{
+    ViewData["Title"] = "Edit Car";
+    var carId = (Guid)ViewBag.CarId;
+}
+
+<h1>Edit Car</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" name="id" value="@carId" />
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label class="form-label">Make</label>
+        <input class="form-control" asp-for="Make" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Model</label>
+        <input class="form-control" asp-for="Model" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Year</label>
+        <input class="form-control" asp-for="Year" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Vin</label>
+        <input class="form-control" asp-for="Vin" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">MileageKm</label>
+        <input class="form-control" asp-for="MileageKm" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Details" asp-route-id="@carId" class="btn btn-secondary">Cancel</a>
+</form>
