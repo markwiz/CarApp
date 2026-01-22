@@ -97,6 +97,38 @@ public sealed class CarServiceTests
         Assert.True(deleted);
         Assert.Null(after);
     }
+    [Fact]
+    public async Task AddAsync_ThrowsValidationException_WhenVinAlreadyExists()
+    {
+        var dbName = Guid.NewGuid().ToString();
+        await using var context = TestDbFactory.CreateContext(dbName);
+        var service = new CarService(context);
+
+        var vin = "DUP12345678901234";
+
+        await service.AddAsync(new CarCreateUpdateDto
+        {
+            Make = "Audi",
+            Model = "A4",
+            Year = 2021,
+            Vin = vin,
+            MileageKm = 10000
+        });
+
+        var ex = await Assert.ThrowsAsync<ValidationException>(async () =>
+            await service.AddAsync(new CarCreateUpdateDto
+            {
+                Make = "Audi",
+                Model = "A6",
+                Year = 2022,
+                Vin = vin,
+                MileageKm = 9000
+            }));
+
+        Assert.Equal("Vin already exists", ex.Message);
+    }
+}
+
 
 
 
